@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import {
-  ClerkProvider,
-
-} from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
+import Footer from "@/components/Footer";
+import { Roboto_Mono } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const robotoMono = Roboto_Mono({
+  weight: ["100", "200", "300", "400", "500", "600", "700",],
+  variable: "--font-roboto-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -30,17 +24,17 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-        <html lang="en">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <ConvexClientProvider>
-              {children}
-            </ConvexClientProvider>
-           
-          </body>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+        </head>
+        <body
+          className={`${robotoMono.variable} antialiased min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 text-gray-100 flex flex-col`}
+        >
+          <ConvexClientProvider>{children}</ConvexClientProvider>
+          <Footer />
+        </body>
       </html>
     </ClerkProvider>
-    
   );
 }
