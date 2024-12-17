@@ -100,7 +100,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
         console.log("data back from piston:", data);
 
-        // handle API-level erros
+        // handle API-level errors
         if (data.message) {
           set({ error: data.message, executionResult: { code, output: "", error: data.message } });
           return;

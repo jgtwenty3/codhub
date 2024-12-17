@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
 import Footer from "@/components/Footer";
 import { Roboto_Mono } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const robotoMono = Roboto_Mono({
   weight: ["100", "200", "300", "400", "500", "600", "700",],
@@ -33,6 +34,7 @@ export default function RootLayout({
         >
           <ConvexClientProvider>{children}</ConvexClientProvider>
           <Footer />
+          <Toaster/>
         </body>
       </html>
     </ClerkProvider>
