@@ -8,6 +8,39 @@ import {api, internal} from "./_generated/api"
 const http = httpRouter();
 
 http.route({
+  path:"/lemon-squeezy-webook",
+  method:"POST",
+  handler:httpAction(async(ctx,request)=>{
+    const payloadString = await request.text();
+    const signature = request.headers.get("X-Signature");
+
+    if (!signature){
+      return new Response("Mising X-Signature Header", {status:400})
+    }
+    try {
+      const payload = await ctx.runAction(internal.lemonsqueezy.verifyWebhook,{
+        payload:payloadString,
+        signature
+      } )
+
+      if (payload.meta.event_name === "order.created"){
+        const {data } = payload
+
+        await ctx.runMutation(api.users.upgradeToPro,{
+          email:data.atrributes.use_email,
+          lemonSqueezyCustomerId: data.attributes.customer_id.toString(),
+          lemonSqueezyOrderId: data.id,
+          amount: data.attributes.total,
+        })
+      }
+      return new Response("Webhook processed successfully", { status: 200 });
+    } catch (error) {
+      return new Response("Error processing webhook", { status: 500 })
+    }
+  })
+})
+
+http.route({
     path:"/clerk-webhook",
     method:'POST',
 
