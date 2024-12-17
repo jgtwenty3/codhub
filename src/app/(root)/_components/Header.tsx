@@ -36,9 +36,7 @@ async function Header() {
             </div>
             <div className="flex flex-col">
               
-              <span className="block text-xs text-blue-400/60 font-medium">
-                Interactive Code Editor
-              </span>
+              
             </div>
           </Link>
           <nav className="flex items-center space-x-1">

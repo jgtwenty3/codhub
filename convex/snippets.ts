@@ -224,3 +224,4 @@ export const deleteComment = mutation({
     await ctx.db.delete(args.commentId);
   },
 });
+
