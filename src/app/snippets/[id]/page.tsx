@@ -10,6 +10,7 @@ import { Editor } from "@monaco-editor/react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "@/app/(root)/_constants";
 import CopyButton from "./_components/CopyButton";
 import SnippetLoadingSkeleton from "./_components/SnippingLoadingSkeleton";
+import Comments from "./_components/Comments";
 
 function SnippetDetailPage() {
   const snippetId = useParams().id;
@@ -91,7 +92,7 @@ function SnippetDetailPage() {
             />
           </div>
 
-          
+          <Comments snippetId={snippet._id} />
         </div>
       </main>
     </div>
